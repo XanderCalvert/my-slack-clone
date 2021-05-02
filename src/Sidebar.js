@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Sidebar.css";
+import { useStateValue } from "./StateProvider";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import CreateIcon from "@material-ui/icons/Create";
 import SidebarOption from "./SidebarOption";
@@ -17,6 +18,7 @@ import db from "./firebase";
 
 function Sidebar() {
 	const [channels, setChannels] = useState([]);
+	const [{ user }] = useStateValue();
 
 	useEffect(() => {
 		// Run this code once when the sidebar component loads
@@ -34,10 +36,10 @@ function Sidebar() {
 		<div className="sidebar">
 			<div className="sidebar__header">
 				<div className="sidebar__info">
-					<h2>Matt Calvert</h2>
+					<h2>Matt Calvert's Slack</h2>
 					<h3>
 						<FiberManualRecordIcon />
-						Matt Calvert
+						{user?.displayName}
 					</h3>
 				</div>
 				<CreateIcon />
